@@ -50,14 +50,34 @@ function inicializaCronometro() {
     campo.one("focus", function() {
         var cronometroID = setInterval(function() {
             tempoRestante--;
+            console.log(tempoRestante);
+            console.log("A");
             $("#tempo-digitacao").text(tempoRestante);
-            if (tempoRestante < 1) {
+            console.log(campo);
+            if (tempoRestante == 0) {
                 campo.attr("disabled", true);
                 clearInterval(cronometroID);
                 campo.addClass("campo-desativado");
+                inserePlacar();
+                console.log(" 3 criou");
             }
+            console.log("B");
         }, 1000);
     });
+}
+
+function inserePlacar(){
+    var corpoTabela = $(".placar").find("tbody");
+    var usuario = "Dymas";
+    var numPalavras = $("#contador-palavras").text();
+
+    var linha = "<tr>"+
+                    "<td>"+ usuario + "</td>"+
+                    "<td>"+ numPalavras + "</td>"+
+                "</tr>";
+    console.log(" 1 criou");
+    corpoTabela.prepend(linha);
+    console.log(" 2 criou");
 }
 
 $("#botao-reiniciar").click(reiniciaJogo);
