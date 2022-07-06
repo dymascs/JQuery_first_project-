@@ -50,18 +50,14 @@ function inicializaCronometro() {
     campo.one("focus", function() {
         var cronometroID = setInterval(function() {
             tempoRestante--;
-            console.log(tempoRestante);
-            console.log("A");
             $("#tempo-digitacao").text(tempoRestante);
-            console.log(campo);
             if (tempoRestante == 0) {
                 campo.attr("disabled", true);
                 clearInterval(cronometroID);
                 campo.addClass("campo-desativado");
                 inserePlacar();
-                console.log(" 3 criou");
             }
-            console.log("B");
+            
         }, 1000);
     });
 }
@@ -75,12 +71,11 @@ function inserePlacar(){
                     "<td>"+ usuario + "</td>"+
                     "<td>"+ numPalavras + "</td>"+
                 "</tr>";
-    console.log(" 1 criou");
     corpoTabela.prepend(linha);
-    console.log(" 2 criou");
+    
 }
 
-$("#botao-reiniciar").click(reiniciaJogo);
+$("#botao-reiniciar").on(reiniciaJogo);  // troca de .click, que estava duplicando a execução de criação de linha, pra .on
 function reiniciaJogo(){
     campo.attr("disabled",false);
     campo.val("");
